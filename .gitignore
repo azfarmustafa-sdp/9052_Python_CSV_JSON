@@ -1,1 +1,4 @@
 .venv
+.env
+BaltimoreCyberTrustRoot.crt.pem
+.vscode
