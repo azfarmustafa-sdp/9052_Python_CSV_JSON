@@ -1,6 +1,6 @@
 # ML Data Extraction
 
-#### This project is to call a stored procedure from DMP MySQL database and pass the output data to Azure ML endpoint.
+#### This project is to call a stored procedure from DMP MySQL database and pass the output data to Azure ML endpoint to generate prediction label and probability score.
 
 ## Prerequisites
 
