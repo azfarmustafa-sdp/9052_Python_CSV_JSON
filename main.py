@@ -1,11 +1,11 @@
 import pymysql
-from dotenv import load_dotenv
 import os
-from pymysql.constants import FIELD_TYPE
-from pymysql.converters import conversions
 import json
 import requests
 import logging
+from dotenv import load_dotenv
+from pymysql.constants import FIELD_TYPE
+from pymysql.converters import conversions
 
 
 def get_database_connection():
@@ -41,7 +41,8 @@ def execute_stored_proc():
                                      user=userName,
                                      password=password, 
                                      db=databaseName,
-                                     ssl_ca='/home/azfarmustafa/9052_Python_CSV_JSON/BaltimoreCyberTrustRoot.crt.pem',
+                                     # SSL certificate value should be according to the absolute/relative path
+                                     ssl_ca='BaltimoreCyberTrustRoot.crt.pem',
                                      charset="utf8",
                                      cursorclass=pymysql.cursors.DictCursor,
                                      conv=conv)
