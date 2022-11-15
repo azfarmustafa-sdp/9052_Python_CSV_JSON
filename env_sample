@@ -1,0 +1,5 @@
+hostName = "XXXXXXXXXX.mysql.database.azure.com"
+userName = "XXXXXXXXXXX"
+password = "XXXXXXXXXXX"
+databaseName = "XXXXXXXXXXX"
+authorization_token = "XXXXXXXXXXX"
