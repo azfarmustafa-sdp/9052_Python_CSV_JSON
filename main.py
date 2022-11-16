@@ -63,6 +63,7 @@ def execute_stored_proc():
         payload = json.dumps(inputs)
 
         logging.info("Stored proc executed successfully")
+        logging.info(f"Stored Proc Output: {payload}")
 
         return payload
 
@@ -82,7 +83,7 @@ def calculate_score(inputData):
         }
     
     # To pass the JSON payload to endpoint for probability score
-    response = requests.request("POST", url,headers=headers, data = inputData)
+    response = requests.request("POST", url, headers=headers, data=inputData)
     json_data = json.loads(response.text)
 
     logging.info("Probability score is calculated")
@@ -95,8 +96,10 @@ if __name__ == "__main__":
     logging.basicConfig(level = logging.INFO)
 
     try:
-        ml_payload = execute_stored_proc()
-        calculate_score(ml_payload)
+        execute_stored_proc()
+
+        #ml_payload = execute_stored_proc()
+        #calculate_score(ml_payload)
         logging.info("Process is successful")
     except Exception as e:
         logging.info(f"{e}")
