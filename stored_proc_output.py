@@ -96,10 +96,8 @@ if __name__ == "__main__":
     logging.basicConfig(level = logging.INFO)
 
     try:
-        execute_stored_proc()
-
-        #ml_payload = execute_stored_proc()
-        #calculate_score(ml_payload)
+        ml_payload = execute_stored_proc()
+        calculate_score(ml_payload)
         logging.info("Process is successful")
     except Exception as e:
         logging.info(f"{e}")
