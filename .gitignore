@@ -2,3 +2,4 @@
 .env
 BaltimoreCyberTrustRoot.crt.pem
 .vscode
+*.csv
