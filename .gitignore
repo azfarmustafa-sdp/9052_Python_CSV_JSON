@@ -3,3 +3,4 @@
 BaltimoreCyberTrustRoot.crt.pem
 .vscode
 *.csv
+*.json
