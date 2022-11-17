@@ -4,6 +4,7 @@ import requests
 import logging
 import glob
 import os
+import pendulum
 from dotenv import load_dotenv
 
 
@@ -40,7 +41,7 @@ def csv_to_json():
     inputs['Inputs'] = webServiceInput0
     inputs['GlobalParameters'] = {}
 
-    jsonString = json.dumps(inputs, indent=4)
+    jsonString = json.dumps(inputs)
 
     return jsonString
 
@@ -56,11 +57,22 @@ def calculate_score(inputData):
     # To pass the JSON payload to endpoint for probability score
     response = requests.request("POST", url, headers=headers, data=inputData)
     json_data = json.loads(response.text)
+    
 
     logging.info("Probability score is calculated")
-    logging.info(f"Prediction result: {json_data}")
 
     return json_data
+
+
+def write_json_file(probability_score):
+    current_date = pendulum.today('Asia/Kuala_Lumpur')
+    current_date = current_date.format('DDMMYYYY')
+
+    with open(f"{current_date}_manual_output.json", "w") as jsonfile:
+        json.dump(probability_score, jsonfile)
+
+    logging.info("JSON File is created")
+
 
 
 if __name__ == "__main__":
@@ -68,7 +80,14 @@ if __name__ == "__main__":
 
     try:
         ml_payload = csv_to_json()
-        calculate_score(ml_payload)
-        logging.info("Process is successful")
+        json_ml_payload = json.loads(ml_payload)
+
+        if len(json_ml_payload['Inputs']['WebServiceInput0']) > 0:
+            probability_score_payload = calculate_score(ml_payload)
+            write_json_file(probability_score_payload)
+
+        else:
+            logging.info("No input data from stored procedure")
+
     except Exception as e:
         logging.info(f"{e}")
