@@ -20,3 +20,7 @@ Execute `requirements.txt` to install the needed packages in the virtual environ
 
 ## Execution Using Stored Procedure
 1. Run the code in `stored_proc_output.py` to get the prediction result.
+
+
+## Reference to run jupyter in vscode
+https://devinschumacher.com/how-to-setup-jupyter-notebook-virtual-environment-vs-code-kernels/
