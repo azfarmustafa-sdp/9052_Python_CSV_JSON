@@ -46,6 +46,33 @@ def csv_to_json():
     return jsonString
 
 
+def csv_to_jsonfile():
+    jsonArray = []
+    inputs = {}
+    webServiceInput0 = {}
+
+    manual_input_file = filename()
+
+    # Encoding is set that option to remove Byte Order Mark in id key
+    with open(manual_input_file, encoding='utf-8-sig') as csvfile:
+        csvReader = csv.DictReader(csvfile)
+        for row in csvReader:
+            jsonArray.append(row)
+
+    # Remove the flag bought column
+    for i in jsonArray:
+            i.pop("flag_bought", None)
+
+    webServiceInput0['WebServiceInput0'] = jsonArray
+    inputs['Inputs'] = webServiceInput0
+    inputs['GlobalParameters'] = {}
+
+    jsonString = json.dumps(inputs, indent=4)
+
+    with open("sample.json", "w") as jsonfile:
+        jsonfile.write(jsonString)
+
+
 def calculate_score(inputData):
     bearer_token = get_authorization_token()
     url = "https://mymagicnumberi59jz7.southeastasia.cloudapp.azure.com:443/api/v1/service/crystalball-01-lg-r01/score"
@@ -74,8 +101,7 @@ def write_json_file(probability_score):
     logging.info("JSON File is created")
 
 
-
-if __name__ == "__main__":
+def main():
     logging.basicConfig(level = logging.INFO)
 
     try:
@@ -91,3 +117,8 @@ if __name__ == "__main__":
 
     except Exception as e:
         logging.info(f"{e}")
+
+
+if __name__ == "__main__":
+    #main()
+    csv_to_jsonfile()
